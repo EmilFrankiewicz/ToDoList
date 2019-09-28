@@ -1,13 +1,17 @@
 package pl.emilfrankiewicz.user;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import pl.emilfrankiewicz.list.ToDoList;
@@ -26,7 +30,11 @@ public class User {
 	@OneToMany(mappedBy = "toDoListOwner", cascade = CascadeType.ALL)
 	private List<ToDoList> toDoList;
 
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Set<UserRole> roles;
+
 	public User() {
+		setRoles(new HashSet<>());
 		setToDoList(new ArrayList<>());
 	}
 
@@ -34,6 +42,14 @@ public class User {
 		this();
 		this.username = username;
 		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -58,6 +74,14 @@ public class User {
 
 	public void setToDoList(List<ToDoList> toDoList) {
 		this.toDoList = toDoList;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 }
