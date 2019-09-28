@@ -23,8 +23,8 @@ public class TaskController {
 		this.taskRepository = taskRepository;
 	}
 
-	@RequestMapping(value = "/api/ToDoList", method = RequestMethod.POST)
-	public ResponseEntity<Task> saveTask(@Valid @RequestBody Task task, BindingResult result) {
+	@RequestMapping(value = "/api/ToDoList/task", method = RequestMethod.POST)
+	public ResponseEntity<Task> saveTask(@Valid @RequestBody Task task, BindingResult result) {  //DTO zrobi tu
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
 			for (FieldError error : errors) {

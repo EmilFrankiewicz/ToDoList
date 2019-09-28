@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
 import pl.emilfrankiewicz.list.ToDoList;
 
 @Entity
@@ -32,6 +30,11 @@ public class User {
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<UserRole> roles;
+
+	public void addToDoList(ToDoList toDoList) {
+		toDoList.setToDoListOwner(this);
+		getToDoList().add(toDoList);
+	}
 
 	public User() {
 		setRoles(new HashSet<>());
