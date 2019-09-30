@@ -1,9 +1,7 @@
 package pl.emilfrankiewicz.user;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +19,12 @@ public class UserController {
 
 	@Autowired
 	public UserController(UserService userService) {
-
 		this.userService = userService;
 	}
 
 	@RequestMapping(value = "/users/register", method = RequestMethod.POST)
-	public ResponseEntity registerUser(@Valid @RequestBody UserDTO newUserDTO, BindingResult result) {
+	public ResponseEntity<User> registerUser(@Valid @RequestBody UserDTO newUserDTO, BindingResult result) {
+
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
 			for (FieldError error : errors) {
@@ -49,7 +47,5 @@ public class UserController {
 		userService.addWithDefaultRole(newUser);
 
 		return ResponseEntity.status(HttpStatus.CREATED).build();
-
 	}
-
 }

@@ -2,7 +2,6 @@ package pl.emilfrankiewicz.user;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,5 +37,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		return authorities;
 	}
-
 }

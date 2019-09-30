@@ -10,9 +10,6 @@ public class TaskDTO {
 	@Length(min = 3, max = 100)
 	private String description;
 
-	@NotEmpty
-	private Boolean isActive;
-
 	@Min(value = 0)
 	private int priority;
 
@@ -27,14 +24,6 @@ public class TaskDTO {
 		this.description = description;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	public int getPriority() {
 		return priority;
 	}
@@ -42,5 +31,4 @@ public class TaskDTO {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-
 }

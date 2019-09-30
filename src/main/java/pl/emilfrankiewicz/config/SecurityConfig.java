@@ -13,5 +13,4 @@ public class SecurityConfig {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return passwordEncoder;
 	}
-
 }

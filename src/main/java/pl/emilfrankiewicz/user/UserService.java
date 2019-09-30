@@ -38,6 +38,4 @@ public class UserService {
 	public UserRepository getUserRepository() {
 		return userRepository;
 	}
-	
-	
 }

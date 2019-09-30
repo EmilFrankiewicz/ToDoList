@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.emilfrankiewicz.list.ToDoList;
 
@@ -16,7 +17,7 @@ public class Task {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	private Date creationDate;
 
@@ -26,13 +27,14 @@ public class Task {
 
 	private int priority;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "to_do_list_id")
 	private ToDoList toDoListId;
 
 	public Task() {
 		setCreationDate(new Date());
-		isActive = true;
+		setIsActive(true);
 	}
 
 	public long getId() {
@@ -82,5 +84,4 @@ public class Task {
 	public void setToDoListId(ToDoList toDoListId) {
 		this.toDoListId = toDoListId;
 	}
-
 }

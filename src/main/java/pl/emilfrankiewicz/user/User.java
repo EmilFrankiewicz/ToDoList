@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import pl.emilfrankiewicz.list.ToDoList;
 
 @Entity
@@ -20,11 +21,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	private String username;
-
+	
 	private String password;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "toDoListOwner", cascade = CascadeType.ALL)
 	private List<ToDoList> toDoList;
 

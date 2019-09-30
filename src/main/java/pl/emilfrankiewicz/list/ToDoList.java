@@ -3,7 +3,6 @@ package pl.emilfrankiewicz.list;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import pl.emilfrankiewicz.task.Task;
 import pl.emilfrankiewicz.user.User;
 
@@ -22,15 +22,17 @@ public class ToDoList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	private Date creationDate;
 
 	private String name;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "toDoListId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Task> tasks;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "to_do_list_owner")
 	private User toDoListOwner;
@@ -38,6 +40,11 @@ public class ToDoList {
 	public ToDoList() {
 		setTasks(new HashSet<>());
 		setCreationDate(new Date());
+	}
+
+	public void addTask(Task task) {
+		task.setToDoListId(this);
+		this.tasks.add(task);
 	}
 
 	public long getId() {
@@ -79,5 +86,4 @@ public class ToDoList {
 	public void setToDoListOwner(User toDoListOwner) {
 		this.toDoListOwner = toDoListOwner;
 	}
-
 }
