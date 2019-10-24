@@ -26,7 +26,11 @@ public class ToDoListService {
 		return toDoListRepository.getAllByToDoListOwner_Username(toDoListOwner);
 	}
 
-	public void delete(ToDoList toDoList) {
+	public Boolean delete(ToDoList toDoList) {
+		Boolean verification;
+		Long id = toDoList.getId();
 		toDoListRepository.delete(toDoList);
+		verification = !toDoListRepository.existsById(id);
+		return verification;
 	}
 }

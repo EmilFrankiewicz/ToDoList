@@ -13,18 +13,12 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserService(PasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
-	}
-
-	@Autowired
-	public void setUserRepository(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, UserRoleRepository roleRepository,
+			PasswordEncoder passwordEncoder) {
+		super();
 		this.userRepository = userRepository;
-	}
-
-	@Autowired
-	public void setRoleRepository(UserRoleRepository roleRepository) {
 		this.roleRepository = roleRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public void addWithDefaultRole(User user) {
@@ -35,7 +29,11 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public UserRepository getUserRepository() {
-		return userRepository;
+	public User getUserByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	public void save(User user) {
+		userRepository.save(user);
 	}
 }

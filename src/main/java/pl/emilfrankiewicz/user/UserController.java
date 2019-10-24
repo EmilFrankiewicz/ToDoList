@@ -36,7 +36,7 @@ public class UserController {
 		String username = newUserDTO.getUsername();
 		String password = newUserDTO.getPassword();
 
-		if (userService.getUserRepository().findByUsername(username) != null) {
+		if (userService.getUserByUsername(username) != null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 

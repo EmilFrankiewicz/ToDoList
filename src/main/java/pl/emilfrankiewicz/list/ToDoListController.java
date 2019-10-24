@@ -44,12 +44,12 @@ public class ToDoListController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 
-		User user = userService.getUserRepository().findByUsername(username);
+		User user = userService.getUserByUsername(username);
 
 		ToDoList toDoList = new ToDoList();
 		toDoList.setName(todoListDTO.getName());
 		user.addToDoList(toDoList);
-		userService.getUserRepository().save(user);
+		userService.save(user);
 
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
@@ -73,7 +73,7 @@ public class ToDoListController {
 		return listToGet;
 	}
 
-	@RequestMapping(value = "/api/ToDoList/{listId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/ToDoList/{listId}", method = RequestMethod.PUT)
 	public ResponseEntity<ToDoList> updateToDoList(Principal principal, @Valid @RequestBody ToDoListDTO toDoListDTO,
 			BindingResult result, @PathVariable("listId") Long id) throws ResourceDoesNotExistException {
 
