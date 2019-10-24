@@ -79,7 +79,7 @@ public class TaskController {
 		return taskToGet;
 	}
 
-	@RequestMapping(value = "/api/ToDoList/{listId}/tasks/{taskId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/ToDoList/{listId}/tasks/{taskId}", method = RequestMethod.PUT)
 	public ResponseEntity<Task> updateTask(Principal principal, @PathVariable("listId") Long listId,
 			@PathVariable("taskId") Long taskId, @Valid @RequestBody TaskDTO taskDTO, BindingResult result) {
 
@@ -113,7 +113,7 @@ public class TaskController {
 		if (taskToDelete == null) {
 			throw new ResourceDoesNotExistException("Task of given ID not found");
 		}
-		taskService.deleteDatk(taskToDelete);
+		taskService.delete(taskToDelete);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }

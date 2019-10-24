@@ -26,7 +26,12 @@ public class TaskService {
 		return taskRepository.save(task);
 	}
 
-	public void deleteDatk(Task task) {
+	public Boolean delete(Task task) {
+		Boolean verification;
+		Long id = task.getId();
 		taskRepository.delete(task);
+		taskRepository.existsById(id);
+		verification = !taskRepository.existsById(id);
+		return verification;
 	}
 }
