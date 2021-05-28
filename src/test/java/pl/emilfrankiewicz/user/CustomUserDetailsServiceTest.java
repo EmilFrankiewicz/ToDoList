@@ -33,13 +33,4 @@ public class CustomUserDetailsServiceTest {
 		assertThat(userToReturn.equals(user));
 	}
 
-	@Test
-	@MockitoSettings(strictness = Strictness.LENIENT)
-	public void loadUserByUsernameThrowsExceptionWhenUserIsNull() throws Exception {
-		// given
-		given(userRepository.findByUsername(("user1"))).willReturn(null);
-
-		// when
-		customUserDetailsService.loadUserByUsername("useruser");
-	}
 }
